@@ -78,7 +78,7 @@ void StackchanSystemConfig::loadConfig(fs::FS& fs, const char *app_yaml_filename
     M5_LOGI("----- StackchanSystemConfig::loadConfig:%s\n", basic_yaml_filename);
     M5_LOGI("----- app_yaml_filename:%s\n", app_yaml_filename);
     fs::File file = fs.open(basic_yaml_filename);
-    DynamicJsonDocument doc(basic_yaml_filesize);
+    JsonDocument doc;
     if (file) {
         DeserializationError err = deserializeYml(doc, file);
         if (err) {
@@ -106,7 +106,7 @@ void StackchanSystemConfig::loadSecretConfig(fs::FS& fs, const char* yaml_filena
     M5_LOGI("----- StackchanSecretConfig::loadConfig:%s\n", yaml_filename);
     File file = fs.open(yaml_filename);
     if (file) {
-        DynamicJsonDocument doc(yaml_size);
+        JsonDocument doc;
         auto err = deserializeYml( doc, file);
         if (err) {
             M5_LOGE("yaml file read error: %s\n", yaml_filename);
@@ -134,7 +134,7 @@ void StackchanSystemConfig::loadSecretConfig(fs::FS& fs, const char* yaml_filena
     }
 }
 
-void StackchanSystemConfig::setSystemConfig(DynamicJsonDocument doc) {
+void StackchanSystemConfig::setSystemConfig(JsonDocument doc) {
     JsonObject servo = doc["servo"];
     _servo[AXIS_X].pin = servo["pin"]["x"];
     _servo[AXIS_Y].pin = servo["pin"]["y"];
@@ -195,7 +195,7 @@ void StackchanSystemConfig::setSystemConfig(DynamicJsonDocument doc) {
     
 }
 
-void StackchanSystemConfig::setSecretConfig(DynamicJsonDocument doc) {
+void StackchanSystemConfig::setSecretConfig(JsonDocument doc) {
 
     _secret_config.wifi_info.ssid     = doc["wifi"]["ssid"].as<String>();
     _secret_config.wifi_info.password = doc["wifi"]["password"].as<String>();
@@ -262,7 +262,7 @@ void StackchanSystemConfig::printSecretParameters() {
     M5_LOGI("apikey_tts: %s", _secret_config.api_key.tts.c_str());
 }
 void StackchanSystemConfig::loadExtendConfig(fs::FS& fs, const char* filename, uint32_t yaml_size) {  };
-void StackchanSystemConfig::setExtendSettings(DynamicJsonDocument doc) {  };
+void StackchanSystemConfig::setExtendSettings(JsonDocument doc) {  };
 void StackchanSystemConfig::printExtParameters(void) {};
 
 void StackchanSystemConfig::basicConfigNotFoundCallback(void) {};
