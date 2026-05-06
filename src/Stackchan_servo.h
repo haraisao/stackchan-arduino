@@ -87,5 +87,10 @@ class StackchanSERVO {
         void motion(Motion motion_no);
         void turnX(uint32_t speed, bool is_cw, uint32_t millis_for_move);
         bool isMoving() { return _isMoving; }
+        int lastX() { return _last_degree_x; }
+        int lastY() { return _last_degree_y; }
+        void moveDeltaXY(int x, int y, uint32_t millis_for_move){
+            moveXY(_last_degree_x + x, _last_degree_y + y, millis_for_move);
+        }
 };
 #endif // _STACKCHAN_SERVO_H_
