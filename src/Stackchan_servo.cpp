@@ -126,13 +126,13 @@ void StackchanSERVO::attachServos() {
     if (_servo_x.attach(_init_param.servo[AXIS_X].pin, 
                         _init_param.servo[AXIS_X].start_degree + _init_param.servo[AXIS_X].offset,
                         DEFAULT_MICROSECONDS_FOR_0_DEGREE,
-                        DEFAULT_MICROSECONDS_FOR_180_DEGREE)) {
+                        DEFAULT_MICROSECONDS_FOR_180_DEGREE) == 0) {
       Serial.print("Error attaching servo x");
     }
     if (_servo_y.attach(_init_param.servo[AXIS_Y].pin, 
                         _init_param.servo[AXIS_Y].start_degree + _init_param.servo[AXIS_Y].offset,
                         DEFAULT_MICROSECONDS_FOR_0_DEGREE,
-                        DEFAULT_MICROSECONDS_FOR_180_DEGREE)) {
+                        DEFAULT_MICROSECONDS_FOR_180_DEGREE) == 0) {
       Serial.print("Error attaching servo y");
     }
 
