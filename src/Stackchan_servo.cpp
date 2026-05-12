@@ -95,7 +95,7 @@ void StackchanSERVO::attachServos() {
     _dxl.setOperatingMode(AXIS_X + 1, OP_EXTENDED_POSITION);
     _dxl.setOperatingMode(AXIS_Y + 1, OP_EXTENDED_POSITION);
     _dxl.writeControlTableItem(DRIVE_MODE, AXIS_X + 1, 4);  // Velocityのパラメータを移動時間(msec)で指定するモードに変更
-    _dxl.writeControlTableItem(DRIVE_MODE, AXIS_Y + 1, 4);  // Velocityのパラメータを移動時間(msec)で指定するモードに変更
+    _dxl.writeControlTableItem(DRIVE_MODE, AXIS_Y + 1, 5);  // Velocityのパラメータを移動時間(msec)で指定するモードに変更
     _dxl.torqueOn(AXIS_X + 1);
     delay(10); // ここでWaitを入れないと、Y(tilt)サーボが動かない場合がある。
     _dxl.torqueOn(AXIS_Y + 1);
