@@ -24,8 +24,8 @@ void StackchanSystemConfig::setDefaultParameters() {
             break;
         case m5::board_t::board_M5StackCoreS3:
         case m5::board_t::board_M5StackCoreS3SE:
-            _servo[AXIS_X].pin = 1;
-            _servo[AXIS_Y].pin = 2;
+            _servo[AXIS_X].pin = 6;
+            _servo[AXIS_Y].pin = 7;
             break;
         default:
             M5_LOGI("UnknownBoard:%d\n", M5.getBoard());
@@ -34,13 +34,13 @@ void StackchanSystemConfig::setDefaultParameters() {
             break;
     }
     _servo[AXIS_X].offset = 0;
-    _servo[AXIS_X].lower_limit = 0;
-    _servo[AXIS_X].upper_limit = 180;
-    _servo[AXIS_X].start_degree = 90;
+    _servo[AXIS_X].lower_limit = 90;
+    _servo[AXIS_X].upper_limit = 270;
+    _servo[AXIS_X].start_degree = 180;
     _servo[AXIS_Y].offset = 0;
-    _servo[AXIS_Y].lower_limit = 50;
-    _servo[AXIS_Y].upper_limit = 90;
-    _servo[AXIS_Y].start_degree = 90;
+    _servo[AXIS_Y].lower_limit = -5;
+    _servo[AXIS_Y].upper_limit = 15;
+    _servo[AXIS_Y].start_degree = 5;
     _servo_interval[0].mode_name = "normal";
     _servo_interval[0].interval_min = 5000;
     _servo_interval[0].interval_max = 10000;
@@ -65,9 +65,9 @@ void StackchanSystemConfig::setDefaultParameters() {
     _led_lr = 0;
     _led_pin = -1;
     _takao_base = false;
-    _servo_type = ServoType::PWM;
-    _servo[AXIS_X].start_degree = 90;
-    _servo[AXIS_Y].start_degree = 90;
+    _servo_type = ServoType::RT_DYN_XL330;
+    _servo[AXIS_X].start_degree = 180;
+    _servo[AXIS_Y].start_degree = 5;
     _secret_config_show = false;
 
 }
