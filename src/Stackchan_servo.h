@@ -53,6 +53,8 @@ typedef struct  StackchanServo{
     servo_param_s servo[2];
 } stackchan_servo_initial_param_s;
 
+#define AXIS_YAW      ServoAxis::AXIS_X
+#define AXIS_PITCH    ServoAxis::AXIS_Y
 
 const float DXL_PROTOCOL_VERSION = 2.0f;
 
