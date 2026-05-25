@@ -94,5 +94,9 @@ class StackchanSERVO {
         void moveDeltaXY(int x, int y, uint32_t millis_for_move){
             moveXY(_last_degree_x + x, _last_degree_y + y, millis_for_move);
         }
+        void detach(){
+            _servo_x.detach();
+            _servo_y.detach();
+        }
 };
 #endif // _STACKCHAN_SERVO_H_
