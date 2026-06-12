@@ -98,5 +98,19 @@ class StackchanSERVO {
             _servo_x.detach();
             _servo_y.detach();
         }
+
+        void torque(bool state){
+            if (_servo_type == ServoType::RT_DYN_XL330) {
+                if (state){
+                    _dxl.torqueOn(AXIS_X + 1);
+                    delay(100);
+                    _dxl.torqueOn(AXIS_Y + 1);
+                }else{
+                    _dxl.torqueOff(AXIS_X + 1);
+                    delay(100);
+                    _dxl.torqueOff(AXIS_Y + 1);
+                }
+            }
+        }
 };
 #endif // _STACKCHAN_SERVO_H_
