@@ -97,7 +97,7 @@ void StackchanSERVO::attachServos() {
     _dxl.writeControlTableItem(DRIVE_MODE, AXIS_X + 1, 4);  // Velocityのパラメータを移動時間(msec)で指定するモードに変更
     _dxl.writeControlTableItem(DRIVE_MODE, AXIS_Y + 1, 5);  // Velocityのパラメータを移動時間(msec)で指定するモードに変更
     _dxl.torqueOn(AXIS_X + 1);
-    delay(10); // ここでWaitを入れないと、Y(tilt)サーボが動かない場合がある。
+    delay(100); // ここでWaitを入れないと、Y(tilt)サーボが動かない場合がある。
     _dxl.torqueOn(AXIS_Y + 1);
     delay(100);
     _dxl.writeControlTableItem(PROFILE_VELOCITY, AXIS_X + 1, 1000);
@@ -277,7 +277,7 @@ void StackchanSERVO::moveXY(int x, int y, uint32_t millis_for_move) {
   }
   _last_degree_x = x;
   _last_degree_y = y;
-  //M5_LOGI("SCS: %d, %d", _last_degree_x, _last_degree_y);
+  M5_LOGI("moveXY: %d, %d", _last_degree_x, _last_degree_y);
 }
 
 void StackchanSERVO::moveXY(servo_param_s servo_param_x, servo_param_s servo_param_y) {
