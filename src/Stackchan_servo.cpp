@@ -46,7 +46,8 @@ float StackchanSERVO::getPosition(int x){
   if (_servo_type == RT_DYN_XL330){
     return _dxl.getPresentPosition(x);;
   } else {
-    M5_LOGI("getPosition::Command is only supprted in RT_DYN_XL330");
+    //M5_LOGI("getPosition::Command is only supprted in RT_DYN_XL330");
+    return -1;
   }
 };
 
