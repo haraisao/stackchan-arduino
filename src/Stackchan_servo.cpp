@@ -44,7 +44,7 @@ StackchanSERVO::~StackchanSERVO() {}
 
 float StackchanSERVO::getPosition(int x){
   if (_servo_type == RT_DYN_XL330){
-    return _dxl.getPresentPosition(x);;
+    return _dxl.getPresentPosition(x);
   } else {
     //M5_LOGI("getPosition::Command is only supprted in RT_DYN_XL330");
     return -1;
@@ -96,9 +96,9 @@ void StackchanSERVO::attachServos() {
     _dxl.setOperatingMode(AXIS_X + 1, OP_EXTENDED_POSITION);
     _dxl.setOperatingMode(AXIS_Y + 1, OP_EXTENDED_POSITION);
     _dxl.writeControlTableItem(DRIVE_MODE, AXIS_X + 1, 4);  // Velocityのパラメータを移動時間(msec)で指定するモードに変更
-    _dxl.writeControlTableItem(DRIVE_MODE, AXIS_Y + 1, 4);  // Velocityのパラメータを移動時間(msec)で指定するモードに変更
+    _dxl.writeControlTableItem(DRIVE_MODE, AXIS_Y + 1, 5);  // Velocityのパラメータを移動時間(msec)で指定するモードに変更
     _dxl.torqueOn(AXIS_X + 1);
-    delay(10); // ここでWaitを入れないと、Y(tilt)サーボが動かない場合がある。
+    delay(100); // ここでWaitを入れないと、Y(tilt)サーボが動かない場合がある。
     _dxl.torqueOn(AXIS_Y + 1);
     delay(100);
     _dxl.writeControlTableItem(PROFILE_VELOCITY, AXIS_X + 1, 1000);
@@ -127,13 +127,13 @@ void StackchanSERVO::attachServos() {
     if (_servo_x.attach(_init_param.servo[AXIS_X].pin, 
                         _init_param.servo[AXIS_X].start_degree + _init_param.servo[AXIS_X].offset,
                         DEFAULT_MICROSECONDS_FOR_0_DEGREE,
-                        DEFAULT_MICROSECONDS_FOR_180_DEGREE)) {
+                        DEFAULT_MICROSECONDS_FOR_180_DEGREE) == 0) {
       Serial.print("Error attaching servo x");
     }
     if (_servo_y.attach(_init_param.servo[AXIS_Y].pin, 
                         _init_param.servo[AXIS_Y].start_degree + _init_param.servo[AXIS_Y].offset,
                         DEFAULT_MICROSECONDS_FOR_0_DEGREE,
-                        DEFAULT_MICROSECONDS_FOR_180_DEGREE)) {
+                        DEFAULT_MICROSECONDS_FOR_180_DEGREE) == 0) {
       Serial.print("Error attaching servo y");
     }
 
@@ -278,7 +278,7 @@ void StackchanSERVO::moveXY(int x, int y, uint32_t millis_for_move) {
   }
   _last_degree_x = x;
   _last_degree_y = y;
-  //M5_LOGI("SCS: %d, %d", _last_degree_x, _last_degree_y);
+  M5_LOGI("moveXY: %d, %d", _last_degree_x, _last_degree_y);
 }
 
 void StackchanSERVO::moveXY(servo_param_s servo_param_x, servo_param_s servo_param_y) {

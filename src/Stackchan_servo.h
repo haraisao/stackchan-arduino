@@ -53,6 +53,8 @@ typedef struct  StackchanServo{
     servo_param_s servo[2];
 } stackchan_servo_initial_param_s;
 
+#define AXIS_YAW      ServoAxis::AXIS_X
+#define AXIS_PITCH    ServoAxis::AXIS_Y
 
 const float DXL_PROTOCOL_VERSION = 2.0f;
 
@@ -91,6 +93,24 @@ class StackchanSERVO {
         int lastY() { return _last_degree_y; }
         void moveDeltaXY(int x, int y, uint32_t millis_for_move){
             moveXY(_last_degree_x + x, _last_degree_y + y, millis_for_move);
+        }
+        void detach(){
+            _servo_x.detach();
+            _servo_y.detach();
+        }
+
+        void torque(bool state){
+            if (_servo_type == ServoType::RT_DYN_XL330) {
+                if (state){
+                    _dxl.torqueOn(AXIS_X + 1);
+                    delay(100);
+                    _dxl.torqueOn(AXIS_Y + 1);
+                }else{
+                    _dxl.torqueOff(AXIS_X + 1);
+                    delay(100);
+                    _dxl.torqueOff(AXIS_Y + 1);
+                }
+            }
         }
 };
 #endif // _STACKCHAN_SERVO_H_
