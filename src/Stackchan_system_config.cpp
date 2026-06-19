@@ -38,9 +38,9 @@ void StackchanSystemConfig::setDefaultParameters() {
     _servo[AXIS_X].upper_limit = 270;
     _servo[AXIS_X].start_degree = 180;
     _servo[AXIS_Y].offset = 0;
-    _servo[AXIS_Y].lower_limit = -5;
-    _servo[AXIS_Y].upper_limit = 15;
-    _servo[AXIS_Y].start_degree = 5;
+    _servo[AXIS_Y].lower_limit = 160;
+    _servo[AXIS_Y].upper_limit = 185;
+    _servo[AXIS_Y].start_degree = 175;
     _servo_interval[0].mode_name = "normal";
     _servo_interval[0].interval_min = 5000;
     _servo_interval[0].interval_max = 10000;
@@ -67,7 +67,7 @@ void StackchanSystemConfig::setDefaultParameters() {
     _takao_base = false;
     _servo_type = ServoType::RT_DYN_XL330;
     _servo[AXIS_X].start_degree = 180;
-    _servo[AXIS_Y].start_degree = 5;
+    _servo[AXIS_Y].start_degree = 175;
     _secret_config_show = false;
 
 }
